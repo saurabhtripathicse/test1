@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">JanduContactApp</string>
+    <string name="permission_heading_1">Contact permission is required for app to run.</string>
+    <string name="permission_heading_2">SMS permission is required for app to run.</string>
+    <string name="grant">Grant Permission</string>
+    <string name="granted">Permission Already Granted</string>
+</resources>
