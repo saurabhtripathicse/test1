@@ -2,6 +2,7 @@ package com.jandu.janducontactapp.di
 
 import android.app.Application
 import com.jandu.janducontactapp.MyApplication
+import com.jandu.janducontactapp.ViewModelModule
 import com.jandu.janducontactapp.repo.RepositoryModule
 import dagger.BindsInstance
 import dagger.Component
@@ -18,7 +19,8 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         ContactModule::class,
         ActivityBindingModule::class,
-        RepositoryModule::class
+        RepositoryModule::class,
+        ViewModelModule::class
     ]
 )
 

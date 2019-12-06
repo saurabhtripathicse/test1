@@ -11,13 +11,9 @@ import javax.inject.Singleton
 
 @Module
 class RepositoryModule {
-
     @Singleton
     @Provides
-    fun provideContactRepo(application: DaggerApplication, contactModule: ContactModule)
-    : ContactListRepo{
+    fun provideContactRepo(application: DaggerApplication, contactModule: ContactModule): ContactListRepo{
         return ContactListRepo(application, contactModule)
     }
-
-
 }

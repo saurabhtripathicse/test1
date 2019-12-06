@@ -34,7 +34,7 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(MainActivityViewModel::class)
-    internal abstract fun mainActivityViewModel(viewModel: MainActivityViewModel): ViewModel
+    abstract fun mainActivityViewModel(viewModel: MainActivityViewModel): ViewModel
 
     //Add more ViewModels here
 }
