@@ -1,9 +1,9 @@
 package com.jandu.janducontactapp.di
 
-import android.app.Application
 import com.jandu.janducontactapp.MyApplication
-import com.jandu.janducontactapp.ViewModelModule
-import com.jandu.janducontactapp.repo.RepositoryModule
+import com.jandu.janducontactapp.di.module.ActivityBindingModule
+import com.jandu.janducontactapp.di.module.ContextModule
+import com.jandu.janducontactapp.di.module.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -14,12 +14,10 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        AppModule::class,
         AndroidSupportInjectionModule::class,
         AndroidInjectionModule::class,
-        ContactModule::class,
         ActivityBindingModule::class,
-        RepositoryModule::class,
+        ContextModule::class,
         ViewModelModule::class
     ]
 )
@@ -33,5 +31,7 @@ interface AppComponent : AndroidInjector<MyApplication> {
 
         fun build(): AppComponent
     }
+
+    override fun inject(app: MyApplication)
 
 }

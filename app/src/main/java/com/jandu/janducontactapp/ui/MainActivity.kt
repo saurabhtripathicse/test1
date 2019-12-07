@@ -1,4 +1,4 @@
-package com.jandu.janducontactapp
+package com.jandu.janducontactapp.ui
 
 
 import android.Manifest.permission.READ_CONTACTS
@@ -8,11 +8,13 @@ import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.jandu.janducontactapp.repo.ContactListRepo
-import dagger.android.DaggerActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import com.jandu.janducontactapp.R
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -20,12 +22,25 @@ import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity() {
 
+    /*@Inject
+    lateinit var viewModeFactory: ViewModelFactory*/
 
+    //lateinit var myViewModel: MainActivityViewModel
+
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    lateinit var viewModel : MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //myViewModel = ViewModelProviders.of(this, this.viewModeFactory).get(MainActivityViewModel::class.java)
+
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(MainActivityViewModel::class.java)
 
         checkPermission()
     }
@@ -35,7 +50,7 @@ class MainActivity : DaggerAppCompatActivity() {
         if ((checkSelfPermission(READ_CONTACTS) == PERMISSION_GRANTED) &&
             (checkSelfPermission(READ_SMS) == PERMISSION_GRANTED)) {
 
-            startActivity(Intent(this, StartActivity::class.java))
+            //startActivity(Intent(this, StartActivity::class.java))
 
             contact_permission_button.isEnabled = false
             sms_permission_button.isEnabled = false
@@ -138,7 +153,16 @@ class MainActivity : DaggerAppCompatActivity() {
         if ((checkSelfPermission(READ_CONTACTS) == PERMISSION_GRANTED) &&
             (checkSelfPermission(READ_SMS) == PERMISSION_GRANTED)) {
 
+           /* myViewModel.loadData().observe(this, Observer {
 
+                Log.i("APPDATA", it.get(0).mobileNumber.toString())
+
+            })*/
+
+            viewModel.getData().observe(this, Observer {
+
+                Log.i("APPDATA", it)
+            })
 
         }
     }
